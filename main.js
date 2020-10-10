@@ -11,8 +11,9 @@ client.on('message' , message =>{
 });
 
 client.on('message', async message => {
+    const prefix = '!';
     const ms = require('ms');
-    const args = message.content.slice(ayarlar.prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     let u = message.mentions.users.first() || message.author;
     if (command === ".sunucu-kur") {
