@@ -10,4 +10,4 @@ client.on('message' , message =>{
     message.reply('Sana da Selam')
 });
 
-client.login(procces.env.token)
+client.login(process.env.token)
