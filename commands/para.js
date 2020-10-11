@@ -2,9 +2,9 @@ const discord = require('discord.js')
 const db = require('quick.db');
 
 module.exports.run = async(client , message , args) =>{
-    let kişi = message.mentions.members.first();
+    let kişi = message.mentions.users.first() ||message.author;
 
- let bakiye = await db.fetch(`money_${message.guild.id}_${kişi}`)
+ let bakiye = await db.fetch(`money_${message.guild.id}_${kişi.id}`)
  if(bakiye === null)bakiye = 0;
  message.channel.send(`${user.tag} , bakiyeniz şu anda **${bakiye}$** miktarında.`)
 }
