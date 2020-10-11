@@ -19,3 +19,10 @@ module.exports.run = async(client , message , args , miktar) =>{
     };
 }
 }
+module.exports.config = {
+    name: "kırmızı",
+    description: "",
+    usage: "!kırmızı",
+    accessableby: "Members",
+    aliases: ["rulet-kırmızı"],
+}
