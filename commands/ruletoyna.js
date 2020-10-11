@@ -18,8 +18,8 @@ module.exports.run = async (client, message, args) => {
         } if (miktar) {
             if (miktar < member)
                 message.channel.send(`${user}` + ` rulete ${miktar} kadar para yatırdı! Şimdi ne yapacaksın Kırmızı mı Siyah mı Yeşil mi?`)
-        };
-    };
+        }
+    }
     const kırmızı = 1;
     const yeşil = 3;
     const siyah = 2;
