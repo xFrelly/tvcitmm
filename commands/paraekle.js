@@ -1,21 +1,25 @@
-const discord = require('discord.js')
 const db = require('quick.db')
+const Discord = require('discord.js')
 
-module.exports.run = async(client , message , args) =>{
-    if(!message.member.roles.cache.get('764751515201175562'))
-    message.channel.send('*Aynen bak şu an para ekledin .d*')
+module.exports.run = async(client, message, args) =>{
 
-    if(!args[1]) message.channel.send('*IQ seviyeni değil gireceğin miktarı yaz.*')
-    if(isNaN(args[1])) message.channel.send('*Geçerli bir sayı yaz.*')
 
-    let kişi = message.mentions.users.first() || message.author;
-    message.channel.send(`Başarıyla ${kişi} üyesine` + `**${args[1]}** kadar **$$$** eklendi.`)
-    db.add(`money_${message.guild.id}_${kişi.id}` , args[1])
+  if (!message.member.roles.cache.get('733613559736565841')) {
+    return message.reply('Bu komutu kullanmak için gerekli izne sahip değilsin.')
 }
-module.exports.config = {
-    name : "!pekle",
-    description : "",
-    usage : "!pekle",
-    accesableby : "Admins",
-    aliases : ["!paraekle"],
-}
+
+if (!args[1]) return message.reply('IQ seviyeni değil ekliyceğin miktarı gir.')
+if (isNaN(args[1])) return message.reply('Bu geçerli bir sayı değil.')
+
+let user = message.mentions.users.first() || message.author
+message.channel.send(`${user}` +  ` Bakiyenize **${args[1]}** altın eklendi.`)
+db.add(`money_${message.guild.id}_${user.id}`, args[1]);
+
+ }
+ module.exports.config = {
+    name: "pekle",
+    description: "",
+    usage: "!pekle",
+    accessableby: "Admins",
+    aliases: ["!altınekle"]
+    }
