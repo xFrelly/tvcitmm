@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 module.exports.run = async(client, message, args) =>{
 
 
-  if (!message.member.roles.cache.get('733613559736565841')) {
+  if (!message.member.roles.cache.get('764751515201175562')) {
     return message.reply('Bu komutu kullanmak için gerekli izne sahip değilsin.')
 }
 
