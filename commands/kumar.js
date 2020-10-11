@@ -1,31 +1,19 @@
 const Dicord = require('discord.js')
 const db = require('quick.db')
 
-module.exports.run = async(client , message , args) => {
-    const üst = '________----------________'
-    const üstalt = '||'
-    const üstaltlt = '|||'
-    const üstaltaltalt = '||||'
-    const alt1 = '|||'
-    const alt2 = '||'
-    const alt = '_________----------_________'
-
+module.exports.run = async (client, message, args) => {
+    const ss = '----';
     const embed = new Dicord.MessageEmbed()
-    .setColor('RANDOM')
-    .addField(üst)
-    .addField(üstalt)
-    .addField(üstaltlt)
-    .addField(üstaltaltalt)
-    .addField(alt1)
-    .addField(alt2)
-    .addField(alt)
+        .setColor('RANDOM')
+        .setImage('https://miro.medium.com/fit/c/336/336/2*QUJcwNlajvPsLo01H9o7yQ.jpeg')
+        .addField('Bir sonraki hamlen ne olacak?', ss)
     message.channel.send(embed);
 }
 
 module.exports.config = {
-    name : "rulet",
-    description : "",
-    usage : "!rulet",
-    accessableby : "Membes",
-    aliases : [""],
+    name: "rulet",
+    description: "",
+    usage: "!rulet",
+    accessableby: "Membes",
+    aliases: [""],
 }
