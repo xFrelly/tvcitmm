@@ -13,5 +13,5 @@ name : "bakiye",
 description : "",
 usage : "!bakiye",
 accesableby : "Members",
-alliases : "!para , !bal , !balance , !coins"
+aliases : "!para , !bal , !balance , !coins"
 }
