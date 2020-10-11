@@ -31,7 +31,7 @@ fs.readdir("./commands/", (err, files) => {
 
 client.on("message", async message => {
   if (message.author.bot || message.channel.type === "dm") return;
-  let prefix = PREFİX;
+  let prefix = '!';
   let args = message.content.slice(prefix.length).trim().split(/ +/g)
   let commands = args.shift().toLowerCase();
   let messageArray = message.content.split(" ");
