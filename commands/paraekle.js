@@ -10,9 +10,7 @@ module.exports.run = async(client , message , args) =>{
     if(isNaN(args[1])) message.channel.send('*Geçerli bir sayı yaz.*')
 
 
-    let bakiye = db.fetch(`money${message.guild.id}_${kişi.id}`)
-    if(bakiye === null)bakiye = 0;
-    message.channel.send(`Başarıyla ${kişi}` + `**${args[1]}** kadar **$$$** gönderildi. Bu kullanıcının yeni bakiyesi şu anda **${bakiye}$$$**`)
+    message.channel.send(`Başarıyla ${kişi}` + `**${args[1]}** kadar **$$$** eklendi.`)
     db.add(`money_${message.guild.id}_${kişi.id}` , args[1])
 }
 module.exports.config = {
