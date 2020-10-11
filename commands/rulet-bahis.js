@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const db = require('quick.db')
 
 module.exports.run = async(client , message , args) => {
-    const kisi = db.fetch(`money_${message.guild.id}_${message.authot.id}`)
+    const kisi = db.fetch(`money_${message.guild.id}_${message.author.id}`)
 
     if(!isNaN(args[1])) message.channel.send('Geçerli bir miktar gir.')
     if(!args[1]) message.channel.send('Paran yoksa oynamayalım...')
