@@ -6,7 +6,7 @@ module.exports.run = async(client , message , args) =>{
 
  let bakiye = await db.fetch(`money_${message.guild.id}_${kişi.id}`)
  if(bakiye === null)bakiye = 0;
- message.channel.send(`${user.tag} , bakiyeniz şu anda **${bakiye}$** miktarında.`)
+ message.channel.send(`${kişi} , bakiyeniz şu anda **${bakiye}$** miktarında.`)
 }
 module.exports.config = {
 name : "bakiye",
