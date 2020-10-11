@@ -96,4 +96,5 @@ command(client, 'tükür', (message) => {
 });
 
 
+
 client.login(process.env.token)
