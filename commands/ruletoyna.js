@@ -19,22 +19,11 @@ module.exports.run = async (client, message, args) => {
             if (miktar < member)
                 message.channel.send(`${user}` + ` rulete ${miktar} kadar para yatırdı! Şimdi ne yapacaksın Kırmızı mı Siyah mı Yeşil mi?`)
         }
-    const kırmızı = 1;
-    const yeşil = 3;
-    const siyah = 2;
-    const renkler = 'Kırmızı , Siyah , Yeşil';
-    const çark = () => Math.floor(Math.random() * 3) + 1;
-
-    if (args[0] === 'kırmızı') {
-        message.reply('Gelen renk...' + çark)
-        if (kırmızı) {
-            message.channel.send(`Tebrikler ${miktar}$ para kazandınız.`)
-            db.add(`money_${message.guild.id}_${message.author.id}`, miktar);
-        } else {
-            message.channel.send(`Tüh! ${miktar}$ para kaybettiniz.`)
-            db.subtract(`money_${message.guild.id}_${message.author.id}`, miktar);
-        };
-    }
+        client.on("miktar", async _miktar => {
+            let commandFile = client.commands.get(cmd.slice(prefix.length)) || client.commands.get(cmd.slice(prefix.length)) || client.commands.get(client.aliases.get(cmd.slice(prefix.length)));
+            if (commandFile) commandFile.run(client, message, args)
+        });
+    
   }
 }
 
