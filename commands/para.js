@@ -10,8 +10,8 @@ module.exports.run = async(client , message , args) =>{
 }
 module.exports.config = {
 name : "bakiye",
-description : "",
+description : "Kişinin ne kadar parası olduğunu gösterir.",
 usage : "!bakiye",
 accesableby : "Members",
-aliases : '',
+aliases : ["!para , !bal , !money , !balance , !cep"]
 }
