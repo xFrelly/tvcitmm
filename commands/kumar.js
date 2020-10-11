@@ -27,5 +27,5 @@ module.exports.config = {
     description : "",
     usage : "!rulet",
     accessableby : "Membes",
-    aliases : "",
+    aliases : [""],
 }
