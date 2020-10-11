@@ -4,6 +4,7 @@ const db = require('quick.db')
 module.exports.run = async (client, message, args) => {
     const member = db.fetch(`money_${message.guild.id}_${message.author.id}`);
     const miktar = args.slice(1).join(' ');
+    const user = message.mentions.users.first() || message.author;
 
         if(!miktar){
             message.channel.send('*Paran yoksa oynamayalım*')
