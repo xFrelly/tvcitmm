@@ -12,7 +12,7 @@ if (!args[1]) return message.reply('IQ seviyeni değil ekliyceğin miktarı gir.
 if (isNaN(args[1])) return message.reply('Bu geçerli bir sayı değil.')
 
 let user = message.mentions.users.first() || message.author
-message.channel.send(`${user}` +  ` Bakiyenize **${args[1]}** altın eklendi.`)
+message.channel.send(`${user}` +  ` Bakiyenize **${args[1]}** kadar $$$ eklendi. İyi kumarlar :)`)
 db.add(`money_${message.guild.id}_${user.id}`, args[1]);
 
  }
