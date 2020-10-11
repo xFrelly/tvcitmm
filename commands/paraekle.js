@@ -13,3 +13,10 @@ module.exports.run = async(client , message , args) =>{
     let bakiye = db.fetch(`money${message.guild.id}_${kişi.id}`)
     message.channel.send(`Başarıyla ${kişi} üyesine` + args[1] + `kadar **$$$** gönderildi. Bu kullanıcının yeni bakiyesi şu anda **${bakiye}$$$**`)
 }
+module.exports.config = {
+    name : "!pekle",
+    description : "",
+    usage : "!pekle , !paraekle",
+    accesableby : "Admins",
+    aliases : ["!paraekle , "],
+}
