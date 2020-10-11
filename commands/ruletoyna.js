@@ -19,7 +19,6 @@ module.exports.run = async (client, message, args) => {
             if (miktar < member)
                 message.channel.send(`${user}` + ` rulete ${miktar} kadar para yatırdı! Şimdi ne yapacaksın Kırmızı mı Siyah mı Yeşil mi?`)
         }
-    }
     const kırmızı = 1;
     const yeşil = 3;
     const siyah = 2;
@@ -36,6 +35,7 @@ module.exports.run = async (client, message, args) => {
             db.subtract(`money_${message.guild.id}_${message.author.id}`, miktar);
         };
     }
+  }
 }
 
 
