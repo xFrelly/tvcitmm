@@ -9,7 +9,7 @@ module.exports.run = async(client , message , args) => {
  .setColor('RANDOM')
  .setTitle('Ruleti Renklere göre oynamaya karar verdin işte kurallar...')
  .setDescription('!rulet-bahis (gireceğin miktar) ile bir bahis yatır ve ardından kırmızı ' + 
- 'siyah' + ' veya yeşil renklerinden birini seç örnek olarak' , '```!rulet-kırmızı```')
+ 'siyah' + ' veya yeşil renklerinden birini seç örnek olarak' + '```!rulet-kırmızı```')
  .addField('Başarılar...', ss)
 
  message.channel.send(embed);
