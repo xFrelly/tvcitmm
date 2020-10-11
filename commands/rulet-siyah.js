@@ -8,5 +8,5 @@ module.exports.config = {
     description : "",
     usage : "" ,
     accessableby : "",
-    aliases : "",
+    aliases : [""],
 }
