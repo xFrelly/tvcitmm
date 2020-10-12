@@ -111,7 +111,7 @@ client.on('message' , message =>{
   if(isValidCommand(message , 'rulet kırmızı')){
     message.channel.send('Çark çevrildi ve gelen renk...' + çark)
     if(message.content === '3'){
-      await message.delete();
+       message.delete();
       message.channel.send('Kırmızı!')
       message.channel.send('Tebrikler ! Kırmızı geldi!')
       db.add(`money_${message.guild.id}_${message.author.id}` , miktar)
