@@ -97,6 +97,9 @@ command(client, 'tükür', (message) => {
 });
 
 client.on('message', message => {
+  let commands = args.shift().toLowerCase();
+  let messageArray = message.content.split(" ");
+  let cmd = messageArray[0];
   let args = message.content.slice(prefix.length).trim().split(/ +/g)
   const miktar = args[0]
   const kisi = db.fetch(`money_${message.guild.id}_${message.author.id}`)
