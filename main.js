@@ -4,8 +4,8 @@ const command = require('./command/command')
 const db = require('quick.db')
 const isValidCommand = (message, cmdName) => message.content.toLowerCase().startsWith(PREFİX + cmdName);
 
-client.on('ready', () =>{
-    console.log(`Botun ${client.user.tag} aktif!`)
+client.on('ready', () => {
+  console.log(`Botun ${client.user.tag} aktif!`)
 })
 
 const fs = require("fs");
@@ -43,8 +43,8 @@ client.on("message", async message => {
 
 });
 
-client.on('message' , message =>{
-    if(message.content === 'Selam')
+client.on('message', message => {
+  if (message.content === 'Selam')
     message.reply('Sana da Selam')
 });
 
@@ -96,28 +96,30 @@ command(client, 'tükür', (message) => {
   }
 });
 
-client.on('message' , message =>{
+client.on('message', message => {
+  let args = message.content.slice(prefix.length).trim().split(/ +/g)
   const miktar = args[0]
   const kisi = db.fetch(`money_${message.guild.id}_${message.author.id}`)
-  const user = message.users.mentions.first() ||message.author;
+  const user = message.users.mentions.first() || message.author;
   const çark = () => Math.floor(Math.random() * 3) + 1
-  if(isValidCommand(message , 'rulet bahis')){
-    if(isNaN(miktar)) return message.channel.send('Geçerli bir sayı gir.')
-    if(miktar > kisi){ message.channel.send('Yetersiz bakiye.')
-  }else{
-    message.channel.send(`${user}` + ` kişisi **${miktar}$$** kadar para yatırdı. Şimdi ne yapacaksın? Kırmızı mı? Siyah mı? Yeşil mi?`)
+  if (isValidCommand(message, 'rulet bahis')) {
+    if (isNaN(miktar)) return message.channel.send('Geçerli bir sayı gir.')
+    if (miktar > kisi) {
+      message.channel.send('Yetersiz bakiye.')
+    } else {
+      message.channel.send(`${user}` + ` kişisi **${miktar}$$** kadar para yatırdı. Şimdi ne yapacaksın? Kırmızı mı? Siyah mı? Yeşil mi?`)
+    }
   }
-  }
-  if(isValidCommand(message , 'rulet kırmızı')){
+  if (isValidCommand(message, 'rulet kırmızı')) {
     message.channel.send('Çark çevrildi ve gelen renk...' + çark)
-    if(message.content === '3'){
-       message.delete();
+    if (message.content === '3') {
+      message.delete();
       message.channel.send('Kırmızı!')
       message.channel.send('Tebrikler ! Kırmızı geldi!')
-      db.add(`money_${message.guild.id}_${message.author.id}` , miktar)
-    }else{
+      db.add(`money_${message.guild.id}_${message.author.id}`, miktar)
+    } else {
       message.channel.send('Tüh! Kırmızı gelmedi !')
-      db.subtract(`money_${message.guild.id}_${message.author.id}` , miktar)
+      db.subtract(`money_${message.guild.id}_${message.author.id}`, miktar)
     }
   }
 })
