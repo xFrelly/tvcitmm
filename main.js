@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const command = require('./command/command')
 const db = require('quick.db')
 const isValidCommand = (message, cmdName) => message.content.toLowerCase().startsWith(PREFİX + cmdName);
-
+const prefix = '!';
 client.on('ready', () => {
   console.log(`Botun ${client.user.tag} aktif!`)
 })
