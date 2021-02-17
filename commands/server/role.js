@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 module.exports.run = async(client , message ,args) => {
  let role = message.mentions.roles.first();
  const member = message.mentions.members.first();
- let user = args.slice(2).join(' ')
+ let user = args.slice(1).join(' ')
  if(!role) {
      message.channel.send('Hangi rolü ekleyeceksin?')
  } else if(!member) {
@@ -14,13 +14,16 @@ module.exports.run = async(client , message ,args) => {
      const embed = new Discord.MessageEmbed()
      .setColor('RANDOM')
      .setDescription(`${member} kişisine ${role} rolü başarıyla eklendi!`)
-     .setFooter('New role system by Cem Gökmen')
+     .setFooter('Yapımcım : Cem❦#6575' , client.user.avatarURL({dynamic : true}))
      .setTimestamp()
      message.channel.send(embed)
  }
 }
 
-module.exports.config = {
-    name : 'rolekle',
-    aliases : ['']
-}
+module.exports.conf = {
+    aliases : ["rolekle" , "addrole" , "rol"],
+    permLevel : 3
+  }
+  exports.help = {
+    name : "rol"
+  }

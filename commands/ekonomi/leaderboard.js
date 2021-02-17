@@ -5,7 +5,7 @@ module.exports.run = async (client , message , args) => {
     let cash = db.all().filter(data => data.ID.startsWith(`money_${message.guild.id}`)).sort((a , b) => b.data - a.data)
     cash.length = 15;
     var finalLb = "";
-    if(!args[1]){
+    if(!args[0]){
     const embed = new Discord.MessageEmbed()
     .setAuthor(message.author.tag , message.author.displayAvatarURL({dynamic : true}))
     .setColor('RANDOM')
@@ -19,7 +19,7 @@ module.exports.run = async (client , message , args) => {
     .setTimestamp()
     message.channel.send(embed);
 
-}else if(args[1] === 'zenginlik') {
+}else if(args[0] === 'zenginlik') {
         for (var i in cash) {
             finalLb += `**${cash.indexOf(cash[i])+1}. <@${message.client.users.cache.get(cash[i].ID.split('_')[2]) ? message.client.users.cache.get(cash[i].ID.split('_')[2]).id : "Bilinmeyen Kullanıcı#0000"}>** •  ${cash[i].data}\n`;
         }
@@ -33,7 +33,10 @@ module.exports.run = async (client , message , args) => {
     }
 
 }
-module.exports.config = {
+module.exports.conf = {
+    aliases : ['lb' , "list" , "liste"],
+    permLeve: 0
+}
+exports.help = {
     name : 'sıralama',
-    aliases : ['']
 }

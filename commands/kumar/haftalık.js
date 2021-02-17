@@ -38,7 +38,10 @@ module.exports.run = async (client, message, args) => {
 };
 
 
-module.exports.config = {
-  name:"haftalık",
-  aliases: ["hafta"]
+module.exports.conf = {
+  aliases: ["haftalık" , "weekly"],
+  permLevel: 0
+}
+exports.help = {
+  name: "haftalık-topla",
 }

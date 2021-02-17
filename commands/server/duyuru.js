@@ -12,7 +12,7 @@ module.exports.run = (client, message, args) => {
       } else if(!kanallar) {
           message.channel.send('Lütfen duyuruyu hangi kanala atıcağını etiketle!')
       }
-      var metin = args.slice(2).join(" ");
+      var metin = args.slice(1).join(" ");
       message.channel.bulkDelete(1);
       const embed = new Discord.MessageEmbed()
       .setTitle(':scroll: Duyuru :')
@@ -28,10 +28,10 @@ module.exports.run = (client, message, args) => {
     }
 };
 
-module.exports.config = {
-    name: "duyuru",
-    description: "",
-    usage: "!duyuru",
-    accessableby: "Admins",
-    aliases: [""]
-    }
+module.exports.conf = {
+  aliases: ["duyur"],
+  permLevel: 4
+}
+exports.help = {
+  name: "duyuru",
+}

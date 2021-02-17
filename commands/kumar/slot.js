@@ -7,7 +7,7 @@ module.exports.run = async (client, message, args) => {
 
     let user = message.author;
     let moneydb = await db.fetch(`money_${message.guild.id}_${user.id}`)
-    let money = parseInt(args[1]);
+    let money = parseInt(args[0]);
     let win = false;
 
     let moneymore = new Discord.MessageEmbed()
@@ -63,7 +63,10 @@ module.exports.run = async (client, message, args) => {
 
 }
   
-  module.exports.config = {
-    name:"slot",
-    aliases: ["slot makinesi"]
+module.exports.conf = {
+    aliases: ["slot"],
+    permLevel: 0
+  }
+  exports.help = {
+    name: "slot--oyna",
   }

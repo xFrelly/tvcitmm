@@ -3,7 +3,7 @@ const Discord = require('discord.js')
 module.exports.run = async(client , message ,args) => {
  let role = message.mentions.roles.first();
  const member = message.mentions.members.first();
- let user = args.slice(2).join(' ')
+ let user = args.slice(1).join(' ')
  if(!role) {
      message.channel.send('Hangi rolü sileceksin?')
  } else if(!member) {
@@ -20,7 +20,10 @@ module.exports.run = async(client , message ,args) => {
  }
 }
 
-module.exports.config = {
-    name : 'rolsil',
-    aliases : ['']
-}
+module.exports.conf = {
+    aliases : ["deleterole" , "rolesil" , "remover" , "removerole"],
+    permLevel : 3
+  }
+  exports.help = {
+    name : "rolsil"
+  }

@@ -35,7 +35,10 @@ module.exports.run = async (client , message , args) => {
         ctx.font = `${size1 -= 5}px sans-serif`
     }while (ctx.measureText(name).width > canvas.width - 225)
 }
-module.exports.config = {
-    name : 'canvas',
-    aliases : [""]
-}
+module.exports.conf = {
+    aliases: ["canv"],
+    permLevel: 0
+  }
+  exports.help = {
+    name: "canvas",
+  }

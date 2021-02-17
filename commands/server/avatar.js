@@ -19,7 +19,10 @@ module.exports.run = async(client , message ,args) => {
         message.channel.send(embed)
     }
 }
-module.exports.config = {
-    name : 'avatar',
-    aliases : ["av"]
-}
+module.exports.conf = {
+    aliases: ["av"],
+    permLevel: 0
+  }
+  exports.help = {
+    name: "avatar",
+  }

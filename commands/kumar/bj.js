@@ -7,11 +7,11 @@ const BlackjackCards = [...Cards, ...Cards, ...Cards];
 const GAME_TIME = 60000;
 const db = require('quick.db')
 module.exports.run = async(client , message , args) => {
-    if(!args[1]) {
+    if(!args[0]) {
         message.channel.send('Lütfen para yatırmak için bir miktar girin.')
     }
-    if(args[1]) {
-    let bet = parseInt(args[1])
+    if(args[0]) {
+    let bet = parseInt(args[0])
     const bakiye = await db.fetch(`money_${message.guild.id}_${message.author.id}`)
 
       if (bet < 0) {
@@ -111,7 +111,10 @@ module.exports.run = async(client , message , args) => {
 })
     }
 }
-module.exports.config = {
-    name : 'bj',
-    aliases : ['blackjack']    
+module.exports.conf = {
+  aliases: ["blackjack" , "21"],
+  permLevel: 0
+}
+exports.help = {
+  name: "bj",
 }

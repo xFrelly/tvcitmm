@@ -12,8 +12,8 @@ module.exports.run = async (client, message, args) => {
 	else if ((num % 2) == 1) return true;
 }
     
-let colour = args[1];
-let money = parseInt(args[2]);
+let colour = args[0];
+let money = parseInt(args[1]);
 let moneydb = await db.fetch(`money_${message.guild.id}_${user.id}`)
 
 let random = Math.floor(Math.random() * 37);
@@ -94,7 +94,10 @@ let colorbad = new Discord.MessageEmbed()
 }
 
   
-  module.exports.config = {
-    name:"rulet",
-    aliases: ["roul"]
+module.exports.conf = {
+    aliases: ["rulet"],
+    permLevel: 0
+  }
+  exports.help = {
+    name: "roulette",
   }

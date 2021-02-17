@@ -1,5 +1,5 @@
 {
     "prefix" : "c!",
-    "mongoPass" : "mongodb+srv://CemGokmen:Esentepe.2010@cluster0.caf5r.mongodb.net/Data"
-    
+    "mongoPass" : "mongodb+srv://CemGokmen:Esentepe.2010@cluster0.caf5r.mongodb.net/Data",
+    "authorid" : "356034188886933504"
 }

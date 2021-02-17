@@ -40,7 +40,10 @@ module.exports.run = async (bot, message, args) => {
 };
 
 
-module.exports.config = {
-  name:"günlük",
-  aliases: ["day , daily"]
+module.exports.conf = {
+  aliases: ["daily" , "day"],
+  permLevel: 0
+}
+exports.help = {
+  name: "günlük",
 }

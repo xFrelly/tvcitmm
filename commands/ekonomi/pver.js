@@ -6,7 +6,7 @@ module.exports.run = async (client, message, args) => {
     
     let user = message.mentions.users.first(); 
     let role = message.mentions.roles.first();
-    let miktar = args.slice(2).join(' ');
+    let miktar = args.slice(1).join(' ');
     let member = db.fetch(`money_${message.guild.id}_${message.author.id}`);
     let altın = await db.fetch(`money_${message.guild.id}_${user.id}`);
         if(altın === null) altın = 0;
@@ -46,7 +46,10 @@ module.exports.run = async (client, message, args) => {
     message.channel.send(embed);
 }
 
-module.exports.config = {
-    name: "pver",
-    aliases: ["paraver , pv"]
-    }
+module.exports.conf = {
+    aliases: ["pv" , "paraver"],
+    permLevel: 3
+  }
+  exports.help = {
+    name: "pekle",
+  }

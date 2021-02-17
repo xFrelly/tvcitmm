@@ -15,10 +15,10 @@ module.exports.run = async(client,message,args) =>{
 }
 
 
-module.exports.config = {
-    name : "kanal",
-    description : "Kanal linkini atar.",
-    usage : "?kanal",
-    accessableby : "Members",
-    aliases : ["?kanallink"]
-}
+module.exports.conf = {
+    aliases: ["cyt"],
+    permLevel: 0
+  }
+  exports.help = {
+    name: "cousins",
+  }

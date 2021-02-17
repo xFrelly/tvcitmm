@@ -15,7 +15,10 @@ module.exports.run = async(client , message , args) => {
     .setTimestamp()
         message.channel.send(embed);
 }
-module.exports.config = {
+module.exports.conf = {
+    aliases : ["para" , "bal" , "money" , "b" , "ceplik"],
+    permLevel: 0
+}
+exports.help = {
     name : 'bakiye',
-    aliases : ["para" , "bal" , "money" , "b" , "ceplik"]
 }

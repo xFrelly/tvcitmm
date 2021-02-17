@@ -9,7 +9,7 @@ module.exports.run = async(client , message , args) => {
     const coin = ['Yazı' , 'Tura']
     const coinFlip = coin[Math.floor(Math.random() * coin.length)]
 
-    if(!args[1]) {
+    if(!args[0]) {
         const embed = new Discord.MessageEmbed()
         .setDescription('Yazı mı Tura mı ?')
         .setAuthor(message.author.tag , message.author.displayAvatarURL({dynamic : true}))
@@ -17,7 +17,7 @@ module.exports.run = async(client , message , args) => {
         .setTimestamp()
         message.channel.send(embed)
     }
-    if(!args[2]) {
+    if(!args[1]) {
         const embed = new Discord.MessageEmbed()
         .setDescription('Kaç para yatıracaksın ?')
         .setAuthor(message.author.tag , message.author.displayAvatarURL({dynamic : true}))
@@ -25,8 +25,8 @@ module.exports.run = async(client , message , args) => {
         .setTimestamp()
         message.channel.send(embed)
     }
-    if(args[2]) {
-        if(args[1] === 'yazı') {
+    if(args[1]) {
+        if(args[0] === 'yazı') {
             if(coinFlip === 'Yazı') {
             db.add(`money_${message.guild.id}_${message.author.id}` , miktar)
             const para2 = await db.fetch(`money_${message.guild.id}_${message.author.id}`)
@@ -70,7 +70,7 @@ module.exports.run = async(client , message , args) => {
         message.channel.send(embed)
             }
         }
-        if(args[1] === 'tura') {
+        if(args[0] === 'tura') {
                 if(coinFlip === 'Tura') {
                 db.add(`money_${message.guild.id}_${message.author.id}` , miktar)
                 const para3 = await db.fetch(`money_${message.guild.id}_${message.author.id}`)
@@ -118,7 +118,10 @@ module.exports.run = async(client , message , args) => {
     }
 }
 
-module.exports.config = {
-    name : 'yazıtura',
-    aliases : ['yt']
-}
+module.exports.conf = {
+    aliases: ["toss" , "yazıtura-at" , "yazıtura"],
+    permLevel: 0
+  }
+  exports.help = {
+    name: "yt",
+  }

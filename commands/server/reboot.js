@@ -8,7 +8,10 @@ module.exports.run = (client, message, args) => {
   })
 };
 
-module.exports.config = {
-  name : 'reboot',
-  aliases : ["rbot"]
+module.exports.conf = {
+  aliases : ["yeniden-başlat"],
+  permLevel : 6
+}
+exports.help = {
+  name : "reboot"
 }
