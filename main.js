@@ -7,6 +7,9 @@ const fs = require('fs')
 const mongoose = require('mongoose')
 const Levels = require('discord-xp')
 
+client.on('guildMemberAdd' , member => {
+
+})
 
 mongoose.connect(ayarlar.mongoPass,
   { useNewUrlParser: true, useUnifiedTopology: true })
@@ -211,38 +214,95 @@ client.once('ready', () => {
   poll(client)
 });
 
-client.commands = new Discord.Collection();
-client.aliases = new Discord.Collection();
-
-fs.readdir("./commands/", (err, files) => {
-
-  if (err) console.log(err)
-
-  let jsfile = files.filter(f => f.split(".").pop() === "js")
-  if (jsfile.length <= 0) {
-    return console.log("[LOGS] Komutları bulamadık!");
-  }
-
-  jsfile.forEach((f, i) => {
-    let pull = require(`./commands/${f}`);
-    client.commands.set(pull.config.name, pull);
-    pull.config.aliases.forEach(alias => {
-      client.aliases.set(alias, pull.config.name);
-    });
-  });
-});
-
-client.on("message", async message => {
-  if (message.author.bot || message.channel.type === "dm") return;
-  let prefix = ayarlar.prefix;
-  let args = message.content.slice(prefix.length).trim().split(/ +/)
-  let messageArray = message.content.split(" ");
-  let cmd = messageArray[0];
-  if (!message.content.startsWith(prefix)) return;
-  let ekonomiDosyası = client.commands.get(cmd.slice(prefix.length)) || client.commands.get(client.aliases.get(cmd.slice(prefix.length)));
-  if (ekonomiDosyası) ekonomiDosyası.run(client, message, args)
-
-});
+client.on('ready', () => {
+       console.log('Bot şu anda aktif!')
+     let mesajlar = [
+        "!yardım",
+         "Dynamic Code"
+          ]
+          let statü = [
+            "idle",
+            "dnd",
+            "online"
+          ]
+          setInterval(function() {
+          let randomstatü = statü[Math.floor(Math.random() * statü.length)] 
+        
+          client.user.setStatus(randomstatü)
+          },3000)
+          setInterval(function(){
+            let randommesaj = mesajlar[Math.floor(Math.random() * mesajlar.length)] 
+            client.user.setActivity(randommesaj)
+          },3000)
+        });
+        
+        const isValidCommand = (message, cmdName) => message.content.toLowerCase().startsWith(PREFİX + cmdName);
+        
+        const fs = require('fs')
+        client.commands = new Discord.Collection()
+        client.aliases = new Discord.Collection()
+        
+        fs.readdirSync('./commands').forEach(dir => {
+          const commandFiles = fs.readdirSync(`./commands/${dir}/`).filter(file => file.endsWith('.js'))
+          for (const file of commandFiles){
+            const komutlar = require(`./commands/${dir}/${file}`)
+            const table = new AsciiTable('Dynamic Code Guard')
+        
+            table
+            .setHeading("Komut" , "Status" , "Aliases")
+        
+            if(komutlar.help.name){
+              client.commands.set(komutlar.help.name , komutlar)
+              table.addRow(komutlar.help.name , "✔️" , komutlar.conf.aliases)
+            }else {
+              table.addRow(komutlar.help.name , "❌")
+              continue;
+            }
+            komutlar.conf.aliases.forEach(alias => {
+              client.aliases.set(alias ,komutlar.help.name)
+            });
+            console.log(table.toString())
+          }
+        })
+        
+client.on('message' , message => {
+          let client = message.client;
+          if(message.author.bot) return;
+          if(!message.content.startsWith(PREFİX)) return;
+          let command = message.content.split(' ')[0].slice(PREFİX.length)
+          let params = message.content.split(' ').slice(1)
+          let perms = client.elevation(message)
+          let cmd;
+          if(client.commands.has(command)) {
+            cmd = client.commands.get(command)
+          }else if (client.aliases.has(command)) {
+            cmd = client.commands.get(client.aliases.get(command))
+          }
+          if(cmd){
+            if(perms < cmd.conf.permLevel)return;
+            cmd.run(client , message , params , perms)
+          }
+        })
+        
+        client.elevation = message => {
+          if(!message.guild) return;
+          let permlvl = 0;
+          if(message.member.hasPermission('KICK_MEMBERS')) permlvl = 1
+          if(message.member.hasPermission('BAN_MEMBERS')) permlvl = 2;
+          if(message.member.hasPermission("ADMINISTRATOR")) permlvl = 3;
+          if(message.member.hasPermission('MANAGE_NICKNAMES')) permlvl = 4;
+          if(message.member.hasPermission("MANAGE_GUILD")) permlvl = 5;
+          if(message.author.id === ayarlar.authorid) permlvl = 6
+        }
+        
+        
+        client.on('message', function (message) {
+          let args = message.content.substring(PREFİX.length).split(' ');
+          if (isValidCommand(message, 'temizle')) {
+            if (!args[0]) return message.channel.send('Lütfen kaç mesaj sileceğinizi yazınız.');
+            message.channel.bulkDelete(args[1], args[1]);
+          }
+        });
 
 
 
