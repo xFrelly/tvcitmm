@@ -306,4 +306,82 @@ client.on('message' , message => {
 
 
 
-client.login(ayarlar.token);
+        client.on('message', async message => {// can#0002
+          if(message.author.bot || message.channel.type !== 'text') return;
+          if(message.content.split(' ').filter(x => x.startsWith(':') && x.endsWith(':')).length > 1) {
+          let emojiler = [];
+          message.content.split(' ').filter(x => x.startsWith(':') && x.endsWith(':')).forEach(x => {
+          emojiler.push(message.guild.emojis.cache.find(s => s.name.includes(x.replace(/:/g, ''))));
+          });
+          let newMessage;
+          var d = -1;
+          if(emojiler.length >= 1) {
+          emojiler.forEach(s => {
+          d++
+          if(!newMessage) newMessage = message.content.replace(message.content.split(' ').filter(x => x.startsWith(':') && x.endsWith(':'))[d], s);
+          if(newMessage) newMessage = newMessage.replace(message.content.split(' ').filter(x => x.startsWith(':') && x.endsWith(':'))[d], s);
+          });
+          };
+          return message.delete() && message.channel.send(`**${message.author.tag}**: ${newMessage}`);
+          };
+          let emoji = message.content.split(' ').find(x => x.startsWith(':') && x.endsWith(':')).toString().replace(/:/g, '');
+          let emojii = message.guild.emojis.cache.find(x => x.name.includes(emoji));
+          if(!emojii) return;
+          message.content = message.content.replace(message.content.split(' ').find(x => x.startsWith(':') && x.endsWith(':')), emojii);
+          return message.delete() && message.channel.send(`**${message.author.tag}**: ${message.content}`);
+          });
+          const express = require("express"); // satır hata verirse silin
+          const app = express(); // satır hata verirse silin
+          
+          app.get("/", (req, res) => res.send("Bot şu anda aktif"));
+          app.listen(process.env.PORT, () =>
+            console.log("Port ayarlandı:" + process.env.PORT)
+          );
+          
+          const guildInvites = new Map();
+          
+          client.on("ready", () => {
+            client.guilds.cache.forEach(guild => {
+              guild.fetchInvites()
+              .then(invites => guildInvites.set(guild.id, invites))
+              .catch(err => console.log(err));
+              });
+          });
+          client.on('inviteCreate', async invite => {
+            guildInvites.set(invite.guild.id, await invite.guild.fetchInvites())
+          });
+          client.on('guildMemberAdd', async member => {
+            const cachedInvites = guildInvites.get(member.guild.id);
+            const newInvites = await member.guild.fetchInvites();
+            guildInvites.set(member.guild.id, newInvites);
+            try {
+              console.log("Davet Eklendi")
+              const usedInvite = newInvites.find(inv => cachedInvites.get(inv.code).uses < inv.uses);
+              const currentInvites = await db.get(`inv.${usedInvite.inviter.id}.total`)
+              if(currentInvites) {
+                db.set(`inv.${member.id}.inviter`, usedInvite.inviter.id)
+                db.add(`${usedInvite.inviter.id}`, 1)
+              } else {
+                db.set(`inv.${usedInvite.inviter.id}.total`, 1)
+                db.set(`inv.${member.id}.inviter`, usedInvite.inviter.id)
+              }
+            }
+            catch(err) {
+              console.log(err);
+            }
+          });
+          
+          client.on('guildMemberRemove', async member => {
+            const inviter = await db.get(`inv.${member.id}.inviter`)
+            const userinviter = await member.guild.members.fetch(`${inviter}`);
+            const currentInvites = await db.get(`inv.${inviter}.total`)
+            try {
+              console.log("Davet Silindi")
+              db.add(`inv.${inviter}.total`, -1)
+              db.delete(`inv.${member.id}.inviter`)
+            } catch(err) {
+              console.log(err);
+            }
+          });
+          
+          client.login(process.env.token);
