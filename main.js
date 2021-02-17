@@ -217,8 +217,8 @@ client.once('ready', () => {
 client.on('ready', () => {
        console.log('Bot şu anda aktif!')
      let mesajlar = [
-        "!yardım",
-         "Dynamic Code"
+        "c!yardım",
+         "Cousins"
           ]
           let statü = [
             "idle",
@@ -246,7 +246,7 @@ client.on('ready', () => {
           const commandFiles = fs.readdirSync(`./commands/${dir}/`).filter(file => file.endsWith('.js'))
           for (const file of commandFiles){
             const komutlar = require(`./commands/${dir}/${file}`)
-            const table = new AsciiTable('Dynamic Code Guard')
+            const table = new AsciiTable('Cousins')
         
             table
             .setHeading("Komut" , "Status" , "Aliases")
